@@ -1,26 +1,37 @@
 package com.pizzafactory.project.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.*;
+
+import javax.persistence.*;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class)
 
 @Entity
+@Table(name = "client")
 public class Client {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(name = "first_name")
     private String firstName;
+    @Column()
     private String lastName;
+    @Column()
     private String email;
+    @Column()
     private String telNum;
+    @Column()
     private String address;
+    @Column()
     private String username;
+    @Column()
     private String password;
+    @Column()
     private Integer bonusPoints;
+    @Column()
     private Boolean hasGiftCard;
+
 
     public Client(String firstName, String lastName, String email, String telNum, String address, String username, String password) {
         this.firstName = firstName;
@@ -110,4 +121,5 @@ public class Client {
     public void setHasGiftCard(Boolean hasGiftCard) {
         this.hasGiftCard = hasGiftCard;
     }
+
 }

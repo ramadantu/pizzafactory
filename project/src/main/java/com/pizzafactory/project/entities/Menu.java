@@ -1,9 +1,6 @@
 package com.pizzafactory.project.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Menu {
@@ -12,8 +9,11 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column
     private String itemName;
+    @Column
     private String description;
+    @Column
     private String drink;
 
     public Menu(String itemName, String description, String drink) {

@@ -1,9 +1,14 @@
 package com.pizzafactory.project.controllers;
 
+import com.pizzafactory.project.entities.Menu;
 import com.pizzafactory.project.repositories.MenuRepository;
+import net.bytebuddy.agent.builder.AgentBuilder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -15,4 +20,7 @@ public class MenuController {
     public MenuController(MenuRepository menuRepository) {
         menuRepo = menuRepository;
     }
+
+    @GetMapping("/fetch")
+    private List<Menu> getItems() {return menuRepo.findAll();}
 }
