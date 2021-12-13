@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class)
-
 @Entity
 @Table(name = "client")
 public class Client {
@@ -32,6 +30,8 @@ public class Client {
     @Column()
     private Boolean hasGiftCard;
 
+    public Client() {
+    }
 
     public Client(String firstName, String lastName, String email, String telNum, String address, String username, String password) {
         this.firstName = firstName;
@@ -41,9 +41,6 @@ public class Client {
         this.address = address;
         this.username = username;
         this.password = password;
-    }
-
-    public Client() {
     }
 
     public Long getId() {

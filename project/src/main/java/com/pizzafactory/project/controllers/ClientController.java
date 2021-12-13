@@ -27,6 +27,7 @@ public class ClientController {
         List<Client> result = clientRepo.findClientByFirstNameAndLastName(fname, lname);
         return ResponseEntity.ok(result.isEmpty()?result:"Not found");
     }
+
     @PostMapping("/save")
     public List<Client> persistClient(String fname, String lname,String email, String num,String address, String username, String password){
         List<Client> clients = clientRepo.findClientByFirstNameAndLastName(fname,lname);
@@ -42,6 +43,7 @@ public class ClientController {
         }
         return response;
     }
+
     @DeleteMapping("/delete")
     public String deleteClient(String fname, String lname){
         List<Client> result = clientRepo.findClientByFirstNameAndLastName(fname, lname);
