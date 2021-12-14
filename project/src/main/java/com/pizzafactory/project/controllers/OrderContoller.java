@@ -1,9 +1,10 @@
 package com.pizzafactory.project.controllers;
 
+import com.pizzafactory.project.entities.Client;
 import com.pizzafactory.project.entities.Orders;
+import com.pizzafactory.project.repositories.ClientRepository;
 import com.pizzafactory.project.repositories.OrdersRepository;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -12,10 +13,13 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderContoller {
 
-    private OrdersRepository orderRepo;
+    private final OrdersRepository orderRepo;
+    private final ClientRepository clientRepo;
 
-    public OrderContoller(OrdersRepository orderRepository) {
-        orderRepo = orderRepository;
+    public OrderContoller(OrdersRepository orderRepo,
+                          ClientRepository clientRepo) {
+        this.orderRepo = orderRepo;
+        this.clientRepo = clientRepo;
     }
 
     @GetMapping("/fetch")

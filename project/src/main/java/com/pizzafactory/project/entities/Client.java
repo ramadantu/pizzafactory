@@ -1,8 +1,10 @@
 package com.pizzafactory.project.entities;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -30,10 +32,18 @@ public class Client {
     @Column()
     private Boolean hasGiftCard;
 
+    @OneToMany(mappedBy = "client" )
+    @JsonIgnore
+    Set<Orders> order;
+
+    @OneToOne(mappedBy = "client")
+    @JsonIgnore
+    private Card card;
+
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String email, String telNum, String address, String username, String password) {
+    public Client(String firstName, String lastName, String email, String telNum, String address, String username, String password,Integer bonusPoints, Boolean hasGiftCard) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -41,6 +51,8 @@ public class Client {
         this.address = address;
         this.username = username;
         this.password = password;
+        this.bonusPoints=bonusPoints;
+        this.hasGiftCard=hasGiftCard;
     }
 
     public Long getId() {
@@ -119,4 +131,19 @@ public class Client {
         this.hasGiftCard = hasGiftCard;
     }
 
+    public Set<Orders> getOrder() {
+        return order;
+    }
+
+    public void setOrder(Set<Orders> order) {
+        this.order = order;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
 }

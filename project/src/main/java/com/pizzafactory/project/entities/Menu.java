@@ -1,8 +1,10 @@
 package com.pizzafactory.project.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name = "menu")
 public class Menu {
 
     @Id
@@ -13,13 +15,19 @@ public class Menu {
     private String itemName;
     @Column
     private String description;
-    @Column
-    private String drink;
 
-    public Menu(String itemName, String description, String drink) {
+    @ManyToMany
+    @JoinTable(
+            name = "menu_drink",
+            joinColumns= @JoinColumn(name="menu_id"),
+            inverseJoinColumns = @JoinColumn(name = "drink_id")
+    )
+    private Set<Drink> drink;
+
+    public Menu(String itemName, String description, Set<Drink> drink) {
         this.itemName = itemName;
         this.description = description;
-        this.drink = drink;
+        this.drink=drink;
     }
 
     public Menu() {
@@ -45,11 +53,11 @@ public class Menu {
         this.description = description;
     }
 
-    public String getDrink() {
+    public Set<Drink> getDrink() {
         return drink;
     }
 
-    public void setDrink(String drink) {
+    public void setDrink(Set<Drink> drink) {
         this.drink = drink;
     }
 }

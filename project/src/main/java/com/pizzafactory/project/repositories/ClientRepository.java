@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-   public List<Client> findAll();
+    List<Client> findAll();
 
-   public List<Client> findClientByFirstNameAndLastName(String fname, String lname);
+    List<Client> findClientByFirstNameAndLastName(String fname, String lname);
+
+    Client findClientByTelNum(String telNum);
 
 }

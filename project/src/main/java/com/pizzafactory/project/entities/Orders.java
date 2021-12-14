@@ -1,8 +1,16 @@
 package com.pizzafactory.project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @Entity
 @Table(name = "orders")
 public class Orders {
@@ -17,15 +25,28 @@ public class Orders {
     private Long menu_id;
     @Column
     private Timestamp createdAt;
-    @Column
-    private Timestamp arrival;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", insertable = false,updatable = false)
+    private Client client;
+
+    @OneToMany(mappedBy = "order")
+    private Set<OrderMenu> orders;
 
     public Orders() {
     }
 
-    public Orders(Timestamp createdAt, Timestamp arrival) {
+    public Orders(Client client,Timestamp createdAt) {
+        this.client=client;
         this.createdAt = createdAt;
-        this.arrival = arrival;
+    }
+
+    public Long getClient_id() {
+        return client_id;
+    }
+
+    public Long getMenu_id() {
+        return menu_id;
     }
 
     public Long getId() {
@@ -40,12 +61,16 @@ public class Orders {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getArrival() {
-        return arrival;
+    public Client getClient() {
+        return client;
     }
 
-    public void setArrival(Timestamp arrival) {
-        this.arrival = arrival;
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Set<OrderMenu> getOrders() {
+        return orders;
     }
 
 }
