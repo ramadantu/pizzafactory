@@ -1,0 +1,130 @@
+package com.pizzafactory.project.controllers;
+
+import com.pizzafactory.project.entities.Card;
+import com.pizzafactory.project.entities.Client;
+import com.pizzafactory.project.entities.OrderMenu;
+import com.pizzafactory.project.entities.Orders;
+import com.pizzafactory.project.repositories.CardRepository;
+import com.pizzafactory.project.repositories.ClientRepository;
+import com.pizzafactory.project.repositories.OrderMenuRepository;
+import com.pizzafactory.project.repositories.OrdersRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/client")
+public class ClientController {
+
+    private final ClientRepository clientRepo;
+    private final CardRepository cardRepo;
+    private final OrdersRepository ordersRepo;
+    private final OrderMenuRepository orderMenuRepo;
+
+    ClientController(
+            ClientRepository  clientRepo,
+            CardRepository cardRepo,
+            OrdersRepository ordersRepo,
+            OrderMenuRepository orderMenuRepo) {
+        this.clientRepo = clientRepo;
+        this.cardRepo = cardRepo;
+        this.ordersRepo = ordersRepo;
+        this.orderMenuRepo = orderMenuRepo;
+    }
+
+    @PostMapping("/card/save")
+    public ResponseEntity<?> persistCard(String name, String email){
+        Client client = clientRepo.findClientByEmail(email);
+        if(client == null || !name.equals(client.getFirstName()))
+            return ResponseEntity.ok("Enter a valid client!");
+
+        Card card = cardRepo.findCardByClientEmail(email);
+        if (card == null)
+            card = new Card(email);
+        else
+            return ResponseEntity.ok("This client already has a card!");
+
+        if(client == null){
+            ResponseEntity.ok("No such client");
+        }
+        else if(client.getId() != null){
+            card.setClientEmail(client.getEmail());
+            card.setClient(client);
+        }
+        card = cardRepo.save(card);
+        return ResponseEntity.ok("Card saved with id " + card.getId());
+    }
+
+    @GetMapping("/card/find")
+    public ResponseEntity<?> findCardByClientEmail(String email){
+        Card result = cardRepo.findCardByClientEmail(email);
+        if(result != null) {
+            return ResponseEntity.ok(
+                    "client email: " + result.getClientEmail() + ", " +
+                    "card id: " + result.getId());
+        }
+        return ResponseEntity.ok("Not found");
+    }
+
+    @GetMapping("/card/fetch")
+    private List<Card> getAllCards(){ return cardRepo.findAll(); }
+
+    @GetMapping("/fetch")
+    private List<Client> getAllClients() { return clientRepo.findAll(); }
+
+    @GetMapping("/find/name")
+    public ResponseEntity<?> findClientByName(String fname, String lname) {
+        List<Client> result = clientRepo.findClientByFirstNameAndLastName(fname, lname);
+        return ResponseEntity.ok(result.isEmpty()? "Not found" : result);
+    }
+
+    @PostMapping("/save")
+    public List<Client> persistClient(
+            String fname,
+            String lname,
+            String email,
+            String num,
+            String address,
+            String username,
+            String password){
+        List<Client> clients = clientRepo.findClientByFirstNameAndLastName(fname,lname);
+        List<Client> response= new ArrayList<>();
+        if(clients.isEmpty()){
+            response.add(clientRepo.save((new Client(fname,lname,email,num,address,username,password))));
+        }
+        for(Client client: clients){
+            client.setTelNum(num);
+            client.setAddress(address);
+            client.setEmail(email);
+            response.add(clientRepo.save(client));
+        }
+        return response;
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteClient(String fname, String lname){
+        List<Client> result = clientRepo.findClientByFirstNameAndLastName(fname, lname);
+
+        if(result.isEmpty()) {
+            return "Client not found";
+        }
+
+        for(Client client:result) {
+            Card card = cardRepo.findCardByClientEmail(client.getEmail());
+            if (card != null)
+                cardRepo.delete(card);
+            Orders order = ordersRepo.findOrdersByClient(client);
+            if (order != null) {
+                OrderMenu orderMenu = orderMenuRepo.findByOrdersId(order.getId());
+                if (orderMenu != null)
+                    orderMenuRepo.delete(orderMenu);
+                ordersRepo.delete(order);
+            }
+            clientRepo.delete(client);
+        }
+        return fname + " " + lname +" was deleted";
+    }
+}
