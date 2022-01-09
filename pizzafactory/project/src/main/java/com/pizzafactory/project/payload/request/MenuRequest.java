@@ -1,12 +1,12 @@
 package com.pizzafactory.project.payload.request;
 
-import java.util.List;
+import java.util.Set;
 
 public class MenuRequest {
 
     private String itemName;
     private String description;
-    private List<String> drinks;
+    private Set<String> drinks;
 
     public String getItemName() {
         return itemName;
@@ -24,11 +24,11 @@ public class MenuRequest {
         this.description = description;
     }
 
-    public List<String> getDrinks() {
+    public Set<String> getDrinks() {
         return drinks;
     }
 
-    public void setDrinks(List<String> drinks) {
+    public void setDrinks(Set<String> drinks) {
         this.drinks = drinks;
     }
 }

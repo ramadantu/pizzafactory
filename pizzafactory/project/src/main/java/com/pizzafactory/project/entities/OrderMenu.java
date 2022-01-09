@@ -15,13 +15,13 @@ public class OrderMenu {
     @EmbeddedId
     private OrderMenuKey id;
 
+
     @ManyToOne
     @MapsId("orderId")
     @JoinColumn(name ="orders_id")
     @JsonBackReference
     private Orders orders;
 
-    @JsonManagedReference
     @ManyToOne
     @MapsId("menuId")
     @JoinColumn(name ="menu_id")
@@ -47,7 +47,7 @@ public class OrderMenu {
         return orders;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Orders orders) {
         this.orders = orders;
     }
 

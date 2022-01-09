@@ -8,11 +8,16 @@ import com.pizzafactory.project.repositories.CardRepository;
 import com.pizzafactory.project.repositories.ClientRepository;
 import com.pizzafactory.project.repositories.OrderMenuRepository;
 import com.pizzafactory.project.repositories.OrdersRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -47,10 +52,7 @@ public class ClientController {
         else
             return ResponseEntity.ok("This client already has a card!");
 
-        if(client == null){
-            ResponseEntity.ok("No such client");
-        }
-        else if(client.getId() != null){
+        if(client.getId() != null){
             card.setClientEmail(client.getEmail());
             card.setClient(client);
         }
@@ -72,13 +74,16 @@ public class ClientController {
     @GetMapping("/card/fetch")
     private List<Card> getAllCards(){ return cardRepo.findAll(); }
 
-    @GetMapping("/fetch")
-    private List<Client> getAllClients() { return clientRepo.findAll(); }
+    @GetMapping("/filter")
+    public ResponseEntity<?> filterClients(String fname, String lname, int currentPage, int perPage) {
+        Pageable pageable = PageRequest.of(currentPage - 1, perPage);
+        Page<Client> clients = clientRepo.filterClients(pageable, fname.toLowerCase(),lname.toLowerCase());
+        Map<String, Object> response = new HashMap<>();
+        response.put("totalElements", clients.getTotalElements());
+        response.put("totalPages", clients.getTotalPages());
+        response.put("clients", clients.getContent());
 
-    @GetMapping("/find/name")
-    public ResponseEntity<?> findClientByName(String fname, String lname) {
-        List<Client> result = clientRepo.findClientByFirstNameAndLastName(fname, lname);
-        return ResponseEntity.ok(result.isEmpty()? "Not found" : result);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/save")
@@ -90,12 +95,16 @@ public class ClientController {
             String address,
             String username,
             String password){
+
         List<Client> clients = clientRepo.findClientByFirstNameAndLastName(fname,lname);
         List<Client> response= new ArrayList<>();
+
         if(clients.isEmpty()){
             response.add(clientRepo.save((new Client(fname,lname,email,num,address,username,password))));
         }
         for(Client client: clients){
+            client.setPassword(password);
+            client.setUsername(username);
             client.setTelNum(num);
             client.setAddress(address);
             client.setEmail(email);

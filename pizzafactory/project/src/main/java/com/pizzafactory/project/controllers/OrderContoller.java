@@ -9,11 +9,16 @@ import com.pizzafactory.project.repositories.ClientRepository;
 import com.pizzafactory.project.repositories.MenuRepository;
 import com.pizzafactory.project.repositories.OrderMenuRepository;
 import com.pizzafactory.project.repositories.OrdersRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -36,9 +41,7 @@ public class OrderContoller {
     }
 
     @GetMapping("/fetch")
-    private List<Orders> getAllOrders() {
-        return ordersRepo.findAll();
-    }
+    public List<Orders> getAllOrders() {return ordersRepo.findAll();}
 
     @PostMapping("/save")
     public ResponseEntity<?> persistOrder(String menuItem, String email, int quantity) {
