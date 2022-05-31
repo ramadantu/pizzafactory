@@ -1,11 +1,10 @@
-package com.pizzaria.project.controllers;
+package com.pizzafactory.project.controllers;
 
-import com.pizzaria.project.entities.Drink;
-import com.pizzaria.project.entities.Menu;
-import com.pizzaria.project.payload.request.MenuRequest;
-import com.pizzaria.project.repositories.*;
-import com.pizzaria.project.repositories.DrinkRepository;
-import com.pizzaria.project.repositories.MenuRepository;
+import com.pizzafactory.project.entities.Menu;
+import com.pizzafactory.project.entities.Drink;
+import com.pizzafactory.project.payload.request.MenuRequest;
+import com.pizzafactory.project.repositories.DrinkRepository;
+import com.pizzafactory.project.repositories.MenuRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

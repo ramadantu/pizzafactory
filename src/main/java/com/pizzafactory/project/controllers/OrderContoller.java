@@ -1,14 +1,14 @@
-package com.pizzaria.project.controllers;
+package com.pizzafactory.project.controllers;
 
-import com.pizzaria.project.entities.Client;
-import com.pizzaria.project.entities.Menu;
-import com.pizzaria.project.entities.OrderMenu;
-import com.pizzaria.project.entities.Orders;
-import com.pizzaria.project.entities.keys.OrderMenuKey;
-import com.pizzaria.project.repositories.ClientRepository;
-import com.pizzaria.project.repositories.MenuRepository;
-import com.pizzaria.project.repositories.OrderMenuRepository;
-import com.pizzaria.project.repositories.OrdersRepository;
+import com.pizzafactory.project.repositories.ClientRepository;
+import com.pizzafactory.project.entities.Client;
+import com.pizzafactory.project.entities.Menu;
+import com.pizzafactory.project.entities.OrderMenu;
+import com.pizzafactory.project.entities.Orders;
+import com.pizzafactory.project.entities.keys.OrderMenuKey;
+import com.pizzafactory.project.repositories.MenuRepository;
+import com.pizzafactory.project.repositories.OrderMenuRepository;
+import com.pizzafactory.project.repositories.OrdersRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

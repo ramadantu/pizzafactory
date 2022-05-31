@@ -1,4 +1,4 @@
-package com.pizzaria.project.entities;
+package com.pizzafactory.project.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,6 +1,6 @@
-package com.pizzaria.project.repositories;
+package com.pizzafactory.project.repositories;
 
-import com.pizzaria.project.entities.Client;
+import com.pizzafactory.project.entities.Client;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
