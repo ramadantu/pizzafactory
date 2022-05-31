@@ -1,4 +1,4 @@
-package com.pizzaria.project.payload.request;
+package com.pizzafactory.project.payload.request;
 
 import java.util.Set;
 

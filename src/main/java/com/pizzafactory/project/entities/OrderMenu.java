@@ -1,7 +1,7 @@
-package com.pizzaria.project.entities;
+package com.pizzafactory.project.entities;
 
 import com.fasterxml.jackson.annotation.*;
-import com.pizzaria.project.entities.keys.OrderMenuKey;
+import com.pizzafactory.project.entities.keys.OrderMenuKey;
 
 import javax.persistence.*;
 

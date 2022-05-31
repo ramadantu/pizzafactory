@@ -1,4 +1,4 @@
-package com.pizzaria.project.entities;
+package com.pizzafactory.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;

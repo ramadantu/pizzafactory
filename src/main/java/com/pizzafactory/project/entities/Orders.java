@@ -1,4 +1,4 @@
-package com.pizzaria.project.entities;
+package com.pizzafactory.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

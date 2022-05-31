@@ -1,4 +1,4 @@
-package com.pizzaria.project.entities.keys;
+package com.pizzafactory.project.entities.keys;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
