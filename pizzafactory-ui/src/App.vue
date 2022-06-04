@@ -2,7 +2,8 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/menu">Menu</router-link>
     </nav>
     <router-view/>
   </div>
@@ -30,3 +31,7 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+<script>export default {
+  components: {}
+}
+</script>
