@@ -29,7 +29,9 @@ public class MenuController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<?> filterMenus(String item, int currentPage, int perPage) {
+    public ResponseEntity<?> filterMenus(@RequestParam(defaultValue = "") String item,
+                                         @RequestParam(defaultValue = "1") int currentPage,
+                                         @RequestParam(defaultValue = "5") int perPage) {
         Pageable pageable = PageRequest.of(currentPage - 1, perPage);
         Page<Menu> menus = menuRepo.filterMenus(pageable, item.toLowerCase());
         Map<String, Object> response = new HashMap<>();
