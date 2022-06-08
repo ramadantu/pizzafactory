@@ -1,0 +1,89 @@
+#body {
+    padding: 30px;
+}
+
+.card {
+    padding: 1rem;
+    max-width: 300px;
+    margin: 0 auto;
+    animation: fade 250ms ease-in-out forwards;
+    box-shadow: 0 0 20px black;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .5rem;
+    gap: .25em;
+}
+
+.form-group:last-child {
+    margin: 0;
+}
+
+.form-group > label {
+    text-align: left;
+    font-weight: bold;
+    font-size: .8em;
+    color: #333333;
+}
+
+.form-group > input {
+    border: 1px solid #333333;
+    border-radius: .25em;
+    font-size: 1rem;
+    padding: .25em;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.step-title {
+    margin: 0 0 1rem;
+    text-align: center;
+}
+
+.card.active {
+    animation: slide 250ms 125ms ease-in-out both;
+    border-radius: 1em;
+    border: 1px solid #333333;
+    background-color: burlywood;
+}
+
+.multi-step-form {
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+.card.hide {
+    display: none;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(200%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(.75);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}

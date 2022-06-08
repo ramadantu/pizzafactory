@@ -1,24 +1,18 @@
 <template>
-  <div>
-    <b-button variant="success" v-on:click="filterMenus">Load Menu</b-button>
-
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="totalElements"
-      :per-page="perPage"
-      aria-controls="my-table"
-      @input="filterMenus"
-    ></b-pagination>
-
-    <b-spinbutton id="demo-sb" v-on:change="filterMenus" v-model="perPage" min="1" max="100"></b-spinbutton>
-
-    <p class="mt-3">
-      Current Page: {{ currentPage }} | Total Rows: {{totalElements}} | Total Pages: {{totalPages}}
-    </p>
+  <div id="body">
+    <div id="spin-button">
+      <label id="text">Per page:</label>
+      <b-spinbutton
+        v-on:change="filterMenus"
+        v-model="perPage"
+        min="1"
+        max="10">
+      </b-spinbutton>
+    </div>
 
     <b-table
       id="my-table"
-      striped hover
+      striped hover fixed
       :items="menus"
       :fields="fields"
       :per-page="0"
@@ -26,16 +20,28 @@
     >
       <template slot="top-row" slot-scope="{ fields }">
         <td v-for="field in fields" :key="field.key">
-          <input v-model="filters[field.key]" :placeholder="field.label">
+          <input
+            id="filter-input"
+            v-model="filters[field.key]" :placeholder="field.label"
+            v-on:input="filterMenus">
         </td>
       </template>
 
       <template v-slot:cell(drink)="list">
-        <td v-for="element in list.item.drink" :key="element.id">
+        <p v-for="element in list.item.drink" :key="element.id" style="display: inline">
         {{element.name}},
-        </td>
+        </p>
       </template>
     </b-table>
+
+    <b-pagination
+      id="pagination"
+      v-model="currentPage"
+      :total-rows="totalElements"
+      :per-page="perPage"
+      aria-controls="my-table"
+      @input="filterMenus"
+    ></b-pagination>
   </div>
 </template>
 
@@ -44,6 +50,9 @@ import MenuServices from '../services/menu-services'
 
 export default {
   name: 'MenuView',
+  created () {
+    this.filterMenus()
+  },
   data () {
     return {
       perPage: 5,
@@ -51,10 +60,7 @@ export default {
       totalElements: 0,
       totalPages: 0,
       filters: {
-        id: '',
-        item: '',
-        description: '',
-        drink: []
+        item: ''
       },
       fields: [
         { key: 'id', label: 'Идентификатор' },
@@ -81,7 +87,6 @@ export default {
     filterMenus () {
       MenuServices.filterMenus(this.perPage, this.currentPage, this.filters.item).then(
         (response) => {
-          console.log(response)
           this.menus = response.data.menus
           this.totalElements = response.data.totalElements
           this.totalPages = response.data.totalPages
@@ -92,6 +97,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="css">
+@import '../assets/styles/menu.css';
 </style>

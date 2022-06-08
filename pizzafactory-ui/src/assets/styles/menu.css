@@ -1,0 +1,28 @@
+#my-table {
+    background-color: #b07246;
+    outline: auto;
+}
+
+#body {
+    padding: 30px;
+}
+
+#spin-button {
+    width: fit-content;
+    margin-bottom: 1em;
+}
+
+#filter-input {
+    width: 100%;
+}
+
+#pagination {
+    display: inline-flex;
+    position: sticky;
+}
+
+#text {
+    margin: 0;
+    color: #212529;
+    font-weight: bold;
+}
