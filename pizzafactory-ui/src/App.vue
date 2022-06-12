@@ -12,6 +12,7 @@
         <b-navbar-nav>
           <b-nav-item to="/">Home</b-nav-item>
           <b-nav-item to="/menu">Menu</b-nav-item>
+          <b-nav-item to="/order">Order</b-nav-item>
           <b-nav-item to="/about">About</b-nav-item>
         </b-navbar-nav>
 

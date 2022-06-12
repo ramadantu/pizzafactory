@@ -41,7 +41,10 @@ public class OrderContoller {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> persistOrder(String menuItem, String email, int quantity) {
+    public ResponseEntity<?> persistOrder(
+            @RequestParam(defaultValue = "") String menuItem,
+            @RequestParam(defaultValue = "") String email,
+            @RequestParam(defaultValue = "0") int quantity) {
 
         if (quantity <= 0)
             return ResponseEntity.ok("Enter a valid quantity!");

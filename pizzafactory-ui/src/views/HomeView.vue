@@ -1,6 +1,6 @@
 <template>
   <div id="body" class="home">
-    <RegisterForm msg="Welcome to the best Pizza Restaurant in the town!"/>
+    <RegisterForm/>
   </div>
 </template>
 

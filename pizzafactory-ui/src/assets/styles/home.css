@@ -2,7 +2,30 @@
     padding: 30px;
 }
 
-.card {
+.animated-header {
+    position: relative;
+    font-size: 10vw;
+    color: #f2ae5e;
+    -webkit-text-stroke: 0.3vw #af4a22;
+    text-transform: uppercase;
+    display: inline-flex;
+}
+
+.animated-header::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    color: darkorange;
+    -webkit-text-stroke: 0 #af4a22;
+    border-right: 2px solid darkorange;
+    overflow: hidden;
+    animation: animate 6s linear infinite;
+}
+
+.form {
     padding: 1rem;
     max-width: 300px;
     margin: 0 auto;
@@ -45,7 +68,7 @@
     text-align: center;
 }
 
-.card.active {
+.form.active {
     animation: slide 250ms 125ms ease-in-out both;
     border-radius: 1em;
     border: 1px solid #333333;
@@ -58,7 +81,7 @@
     padding: 20px;
 }
 
-.card.hide {
+.form.hide {
     display: none;
 }
 
@@ -85,5 +108,14 @@
     100% {
         transform: scale(0);
         opacity: 0;
+    }
+}
+
+@keyframes animate {
+    0%,10%,100% {
+        width: 0;
+    }
+    70%,90% {
+        width: 100%;
     }
 }

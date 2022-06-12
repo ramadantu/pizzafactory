@@ -90,19 +90,19 @@ public class ClientController {
 
     @PostMapping("/save")
     public List<Client> persistClient(
-            String fname,
-            String lname,
-            String email,
-            String num,
-            String address,
-            String username,
-            String password) {
+            @RequestParam(defaultValue = "") String firstName,
+            @RequestParam(defaultValue = "") String lastName,
+            @RequestParam(defaultValue = "") String email,
+            @RequestParam(defaultValue = "") String num,
+            @RequestParam(defaultValue = "") String address,
+            @RequestParam(defaultValue = "") String username,
+            @RequestParam(defaultValue = "") String password) {
 
-        List<Client> clients = clientRepo.findClientByLastName(lname);
+        List<Client> clients = clientRepo.findClientByLastName(lastName);
         List<Client> response = new ArrayList<>();
 
         if (clients.isEmpty()) {
-            response.add(clientRepo.save((new Client(fname, lname, email, num, address, username, password))));
+            response.add(clientRepo.save((new Client(firstName, lastName, email, num, address, username, password))));
         }
         for (Client client : clients) {
             client.setPassword(password);

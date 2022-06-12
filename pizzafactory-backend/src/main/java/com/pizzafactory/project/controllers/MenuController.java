@@ -28,6 +28,15 @@ public class MenuController {
         this.drinkRepo = drinkRepo;
     }
 
+    @GetMapping("/fetch")
+    public List<String> fetchMenusItem() {
+        List<String> menuItem = new ArrayList<>();
+        for (Menu menu: menuRepo.findAll()) {
+            menuItem.add(menu.getItem());
+        }
+        return menuItem;
+    }
+
     @GetMapping("/filter")
     public ResponseEntity<?> filterMenus(@RequestParam(defaultValue = "") String item,
                                          @RequestParam(defaultValue = "1") int currentPage,

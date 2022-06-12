@@ -1,0 +1,66 @@
+.order-form {
+    padding: 20px;
+    border-radius: 1em;
+    border: 1px solid #333333;
+    background-color: burlywood;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
+    box-shadow: 0 0 20px black;
+}
+
+.form-title {
+    margin: 0 0 1rem;
+    text-align: center;
+}
+
+.card-title {
+    background-color: #ffd700c9;
+    box-shadow: 0 0 20px 10px gold;
+    margin: revert;
+    font-weight: bold;
+}
+
+#offer {
+    padding: 10px;
+    margin: 40px auto 60px;
+    background-color: #98fb98ba;
+    box-shadow: 0 0 30px 10px palegreen;
+    border: none;
+}
+
+#offer-text {
+    margin-top: 40px;
+    font-style: italic;
+    font-weight: 900;
+}
+
+#offer-image {
+    height: 100%;
+}
+
+#special-text {
+    color: red;
+    font-size: xx-large;
+    font-weight: 900;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#input-group-menu {
+    margin-right: 5px;
+}
+
+#input-group-quantity {
+    margin-left: 5px;
+}

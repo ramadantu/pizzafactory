@@ -12,6 +12,10 @@ class MenuServices {
       }
     })
   }
+
+  fetchMenusItem () {
+    return axios.get(API_URL + 'menu/fetch')
+  }
 }
 
 export default new MenuServices()

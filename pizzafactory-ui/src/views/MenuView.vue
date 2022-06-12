@@ -1,13 +1,23 @@
 <template>
   <div id="body">
-    <div id="spin-button">
-      <label id="text">Per page:</label>
-      <b-spinbutton
-        v-on:change="filterMenus"
-        v-model="perPage"
-        min="1"
-        max="10">
-      </b-spinbutton>
+    <div id="filter-table">
+      <div id="spin-button">
+        <label id="text">Per page:</label>
+        <b-spinbutton
+          v-on:change="filterMenus"
+          v-model="perPage"
+          min="1"
+          max="10">
+        </b-spinbutton>
+      </div>
+      <div id="filter-input">
+        <b-form-input
+          v-model="filters.item"
+          type="search"
+          placeholder="Type to Search"
+          @input="filterMenus">
+        </b-form-input>
+      </div>
     </div>
 
     <b-table
@@ -15,18 +25,10 @@
       striped hover fixed
       :items="menus"
       :fields="fields"
+      :filter="filters.item"
       :per-page="0"
       :current-page="currentPage"
     >
-      <template slot="top-row" slot-scope="{ fields }">
-        <td v-for="field in fields" :key="field.key">
-          <input
-            id="filter-input"
-            v-model="filters[field.key]" :placeholder="field.label"
-            v-on:input="filterMenus">
-        </td>
-      </template>
-
       <template v-slot:cell(drink)="list">
         <p v-for="element in list.item.drink" :key="element.id" style="display: inline">
         {{element.name}},
@@ -85,13 +87,19 @@ export default {
   },
   methods: {
     filterMenus () {
-      MenuServices.filterMenus(this.perPage, this.currentPage, this.filters.item).then(
-        (response) => {
-          this.menus = response.data.menus
-          this.totalElements = response.data.totalElements
-          this.totalPages = response.data.totalPages
-        }
+      MenuServices.filterMenus(
+        this.perPage,
+        this.currentPage,
+        this.filters.item
       )
+        .then(
+          (response) => {
+            this.menus = response.data.menus
+            this.totalElements = response.data.totalElements
+            this.totalPages = response.data.totalPages
+            console.log(response)
+          }
+        )
     }
   }
 }

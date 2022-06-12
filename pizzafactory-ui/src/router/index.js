@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MenuView from '../views/MenuView'
+import OrderView from '../views/OrderView'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/menu',
     name: 'Menu',
     component: MenuView
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: OrderView
   },
   {
     path: '/about',
