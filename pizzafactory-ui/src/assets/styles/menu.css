@@ -7,13 +7,17 @@
     padding: 30px;
 }
 
+#filter-table{
+    display: flex;
+    justify-content: space-between;
+}
+
 #spin-button {
     width: fit-content;
     margin-bottom: 1em;
 }
 
 #filter-input {
-    width: 100%;
 }
 
 #pagination {
