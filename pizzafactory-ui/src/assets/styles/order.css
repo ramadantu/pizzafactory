@@ -8,6 +8,7 @@
     width: fit-content;
     margin: 0 auto;
     box-shadow: 0 0 20px black;
+    animation: slide 250ms 125ms ease-in-out both;
 }
 
 .form-title {
@@ -63,4 +64,15 @@
 
 #input-group-quantity {
     margin-left: 5px;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(200%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
